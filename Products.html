@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="registroRecetaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" style="background: #B6FFEA;">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="registroRecetaModalLabel">Edit Product</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="recipeForm">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Id</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="id"
+                            disabled
+                            aria-describedby="helpId"
+                            placeholder=""
+                        />
+                        <small id="helpId" class="form-text text-muted">Help text</small>
+                    </div>
+                    <div class="mb-3">
+                      <label for="name_edit" class="form-label">Name:</label>
+                      <input type="text" id="name_edit" name="name_create" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="descripcion" class="form-label">Description:</label>
+                      <textarea id="descripcion" class="form-control" name="descripcion" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="price" class="form-label">Price per Unit:</label>
+                      <input type="number" id="price" name="price"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="stock" class="form-label">Stock:</label>
+                      <input type="number" id="stock" name="stock"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="categoryDropDown" class="form-label">Categories:</label>
+                      <select id="categoryDropDown" class="form-control">
+                          <option value="">Choose a category</option>
+                          <option value="Videogames">Videogames</option>
+                          <option value="TvShows">Tvshows</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="unit" class="form-label">Unit:</label>
+                      <input type="text" id="unit" name="unit"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="url" class="form-label">ImageURL:</label>
+                      <input type="text" id="url" name="url"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <button type="button" class="action-btn" onclick="StoreEditedProduct()">Create Product</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="registroRecetaModal" tabindex="-1" aria-labelledby="registroRecetaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" style="background: #B6FFEA;">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="registroRecetaModalLabel">Create new Product</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="create_form" onsubmit="sendData()">
+                    <div class="mb-3">
+                      <label for="name_create" class="form-label">Name:</label>
+                      <input type="text" id="name_create" name="name_create" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="descripcion_create" class="form-label">Description:</label>
+                      <textarea id="descripcion_create" class="form-control" name="descripcion" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="price_create" class="form-label">Price per Unit:</label>
+                      <input type="number" id="price_create" name="price"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="stock_create" class="form-label">Stock:</label>
+                      <input type="number" id="stock_create" name="stock"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="categoryDropDown_create" class="form-label">Categories:</label>
+                      <select id="categoryDropDown_create" class="form-control">
+                          <option value="">Choose a category</option>
+                          <option value="Videogames">Videogames</option>
+                          <option value="TvShows">Tvshows</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="unit_create" class="form-label">Unit:</label>
+                      <input type="text" id="unit_create" name="unit"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="url_create" class="form-label">ImageURL:</label>
+                      <input type="text" id="url_create" name="url"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                      <button type="submit" class="action-btn">Create Product</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <style>
+            /* Estilo para la tabla */
+            table {
+                border-collapse: collapse; /* Combina los bordes de las celdas adyacentes */
+                width: 100%; /* Ancho de la tabla */
+            }
+            
+            /* Estilo para las celdas */
+            th, td {
+                border: 1px solid black; /* Borde de 1 píxel sólido de color negro */
+                padding: 8px; /* Espaciado interno de las celdas */
+                text-align: left; /* Alineación del texto */
+            }
+        </style>
+
+<form action="" onsubmit="logIn()">
+  <div
+    class="modal fade"
+    id="Login_modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Log In</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <label for="login_e-mail" class="dp-none">Email</label>
+            <div class="input-group mb-3">
+              <input
+                id="login_e-mail"
+                type="email"
+                class="form-control"
+                placeholder="Enter your E-mail"
+                aria-label="E_mail"
+                aria-describedby="basic-addon1"
+                required
+              />
+              <span class="input-group-text" id="basic-addon1"
+                ><i class="bi bi-envelope"></i
+              ></span>
+            </div>
+            <label for="passwd" class="dp-none">Password</label>
+            <div class="input-group mb-3">
+              <input
+                id="passwd"
+                type="password"
+                class="form-control"
+                placeholder="Enter your password"
+                aria-label="password"
+                aria-describedby="basic-addon1"
+                required
+              />
+              <span class="input-group-text" id="basic-addon1"
+                ><i class="bi bi-key fill"></i
+              ></span>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                Remember
+              </label>
+            </div>
+            <div class="text-center">
+              <button type="" class="btn btn-primary">Log In</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="text-center">
+            <p>
+              Don't have an account?
+              <a href="#" data-bs-toggle="modal" data-bs-target="#SignUpM"
+                >Sign Up here</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  var modalId = document.getElementById("Login_modal");
+
+  modalId.addEventListener("show.bs.modal", function (event) {
+    // Button that triggered the modal
+    let button = event.relatedTarget;
+    // Extract info from data-bs-* attributes
+    let recipient = button.getAttribute("data-bs-whatever");
+
+    // Use above variables to manipulate the DOM
+  });
+</script>
+
+
+<style>
+  #filter {
+    width: 100%;
+  }
+
+  #filter .dropdown-menu {
+    width: 100%;
+  }
+</style>
+
+
+   
+    </head>
+
+    <body>
+
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
+              <a class="navbar-brand" href="index.html"
+                ><img
+                  src="https://i.pinimg.com/736x/57/fa/9a/57fa9aa16ae0a22bc2867f26bc5f4666.jpg"
+                  alt=""
+                  width="50"
+              /></a>
+              <button
+                class="navbar-toggler d-lg-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId"
+                aria-controls="collapsibleNavId"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                Menú
+              </button>
+              <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-0 mt-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="index.html" aria-current="page"
+                      >Home <span class="visually-hidden">(current)</span></a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="P01_about_us.html">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Products.html">Products</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="Categorias"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      >Categories</a
+                    >
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                      <a class="dropdown-item" href="P01_cat_A.html">Videogames</a>
+                      <a class="dropdown-item" href="P01_cat_B.html">Movies and Tv'shows</a>
+                    </div>
+                  </li>
+                  
+                </ul>
+                <a
+                  href="#"
+                  class="text-white text-decoration-none mx-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#Login_modal"
+                  role="button"
+                  ><i class="bi bi-person"></i>Login</a
+                >
+                <a href="P01_cart.html" class="text-white"><i class="bi bi-cart mx-4"></i></a>
+              </div>
+            </nav>
+          </header>
+          
+
+        <h1>Product list</h1>
+
+        
+        
+
+    
+        
+        
+        <!-- Modal trigger button -->
+        
+        
+        <div class="container mt-5">
+          <div id="filter" class="mb-3">
+            <label for="categories" class="form-label">Choose a category:</label>
+            <select name="categories" id="categories" class="form-select">
+              <option value="">Choose a category</option>
+              <option value="Videogames">Videogames</option>
+              <option value="TvShows">TvShows</option>
+            </select>
+            <div class="input-group mt-3">
+              <span class="input-group-text">$</span>
+              <input type="number" id="minPrice" name="minPrice" class="form-control" placeholder="Minimum Price">
+              <span class="input-group-text">to</span>
+              <input type="number" id="maxPrice" name="maxPrice" class="form-control" placeholder="Maximum Price">
+              <button id="filterBtn" class="btn btn-primary"><i class="bi bi-filter"></i> Filter</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="info"></div>
+
+        <div id="add_product">
+
+        </div>
+        
+            
+
+
+            <nav
+          aria-label="Page navigation example"
+          class="justify-content-center d-flex"
+        >
+
+          <ul id="pagination" class="pagination" style="display: none;">
+            
+          </ul>
+        </nav>
+        
+
+        
+
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+
+        
+        <script src="./js/navbar.js"></script>
+        <script src="./js/products.js"></script>
+        <script src="./js/data_manager.js"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+
+    </body>
+</html>
